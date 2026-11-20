@@ -9,3 +9,6 @@ secrets/
 state/
 tailscale-state/
 *.state
+
+#reports
+reports/
