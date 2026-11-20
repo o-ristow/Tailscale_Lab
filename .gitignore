@@ -1,0 +1,11 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+secrets/
+!secrets.example/
+
+# Tailscale runtime identity and state
+state/
+tailscale-state/
+*.state
