@@ -1,0 +1,22 @@
+services:
+  tailscale:
+    image: tailscale/tailscale:stable
+    restart: unless-stopped
+    cpus: "1.0"
+    mem_limit: 512m
+    cpu_shares: 1024
+    network_mode: host
+    userns_mode: host
+    environment:
+      TS_HOSTNAME: ${TAILSCALE_HOSTNAME:?Set TAILSCALE_HOSTNAME in .env}
+      TS_ROUTES: ${TAILSCALE_ROUTES:?Set TAILSCALE_ROUTES in .env}
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_USERSPACE: "false"
+      TS_AUTH_ONCE: "true"
+      TS_ACCEPT_DNS: "false"
+    volumes:
+      - ./state:/var/lib/tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
